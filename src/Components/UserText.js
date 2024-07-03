@@ -10,16 +10,30 @@ export default function UserText(props) {
         let newText = text.toUpperCase();
         setText(newText);
     }
-    
+
+    //function for converting text to lower case
     const toLower = () =>{
         let newText = text.toLowerCase();
         setText(newText);
     }
 
+    //function for  erasing text
+    const forErase = () =>{
+        setText("");
+    }
+
+    //function for handling event on change
     const toChange = (event) =>{
         console.log("Changed!!");
         setText(event.target.value)
     }
+
+    //function for counting words in text
+    const countWords = (text) => {
+        return text.trim().split(/\s+/).filter(word => word.length > 0).length;
+    }
+
+    
 
     //fist object 
     const headingStyle = {
@@ -53,6 +67,7 @@ export default function UserText(props) {
      };
 
   return (
+    <>
     <div>
     {/* div for heading */}
 
@@ -67,9 +82,18 @@ export default function UserText(props) {
         <textarea  className="form-control" id="exampleFormControlTextarea1" rows="12" style={textAreaStyle} value={text} onChange={toChange}></textarea>
     </div>
 
-    <button className="btn btn-success mb-3 mx-5" onClick={toUpper}>Convert to Uppercase</button>
+    <button className="btn btn-success mb-3 mx-5" onClick={toUpper}>toUpper</button>
 
-    <button className="btn btn-success mb-3" onClick={toLower}>Convert to Lowercase</button>
+    <button className="btn btn-success mb-3 mx-2" onClick={toLower}>toLower</button>
+
+    <button className="btn btn-success mb-3 mx-5" onClick={forErase}>toClear</button>
 </div>
+
+<div className="mb-4 mx-5">
+<label for="exampleFormControlTextarea1" className="form-label"><strong><strong><h5>Text Summary : </h5></strong></strong></label>
+<p>Text has total {countWords(text)} words & {text.length} characters.</p>
+<p>{countWords(text)*0.008} time required to read.</p>
+</div>
+</>
   )
 }
