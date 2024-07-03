@@ -33,7 +33,13 @@ export default function UserText(props) {
         return text.trim().split(/\s+/).filter(word => word.length > 0).length;
     }
 
-    
+    //function for coping text to clipboard
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Text copied to clipboard!");
+        });
+    }
+
 
     //fist object 
     const headingStyle = {
@@ -87,12 +93,14 @@ export default function UserText(props) {
     <button className="btn btn-success mb-3 mx-2" onClick={toLower}>toLower</button>
 
     <button className="btn btn-success mb-3 mx-5" onClick={forErase}>toClear</button>
+
+    <button className="btn btn-success mb-3 mx-2" onClick={copyToClipboard}>forCopy</button>
 </div>
 
 <div className="mb-4 mx-5">
 <label for="exampleFormControlTextarea1" className="form-label"><strong><strong><h5>Text Summary : </h5></strong></strong></label>
 <p>Text has total {countWords(text)} words & {text.length} characters.</p>
-<p>{countWords(text)*0.008} time required to read.</p>
+<p>{countWords(text)*0.008} mins required to read.</p>
 </div>
 </>
   )
